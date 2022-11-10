@@ -12,62 +12,71 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
 {
     public abstract class DbTestsBase
     {
-        private readonly DatabaseInitializerFixture _fixture;
+        protected readonly DatabaseInitializerFixture _fixture;
 
         public DbTestsBase(DatabaseInitializerFixture fixture)
         {
             _fixture = fixture;
         }
 
-        readonly Country _dbCountry = new Country
+        readonly Country _dbCountry = new()
         {
             Name = "...loading...",
             ISO = "AU",
-            Created = new DateTime(1970, 1, 1),
+            Created = NewDateTime(1970, 1, 1),
         };
-        readonly PageVisit _dbVisitOld = new PageVisit
+        readonly PageVisit _dbVisitOld = new()
         {
             UserID = 1,
-            Date = DateTime.Today.AddDays(-1),
+            Date = _today.AddDays(-1),
             Visits = 10,
-            FirstVisit = new DateTime(1970, 1, 1),
-            LastVisit = new DateTime(1970, 1, 1),
+            FirstVisit = NewDateTime(1970, 1, 1),
+            LastVisit = NewDateTime(1970, 1, 1),
         };
-        readonly PageVisit _dbVisit = new PageVisit
+        readonly PageVisit _dbVisit = new()
         {
             UserID = 1,
-            Date = DateTime.Today,
+            Date = _today,
             Visits = 12,
-            FirstVisit = new DateTime(1970, 1, 1),
-            LastVisit = new DateTime(1970, 1, 1),
+            FirstVisit = NewDateTime(1970, 1, 1),
+            LastVisit = NewDateTime(1970, 1, 1),
         };
-        readonly Status _dbStatus = new Status
+        readonly Status _dbStatus = new()
         {
             ID = 1,
             Name = "Created",
-            LastChecked = new DateTime(1970, 1, 1),
+            LastChecked = NewDateTime(1970, 1, 1),
         };
-        readonly Book _dbBook = new Book
+        readonly Book _dbBook = new()
         {
             Name = "The Fellowship of the Ring",
             Genres = new[] { "Fantasy" },
         };
-        readonly NullableCompositeKey _nullableKey1 = new NullableCompositeKey
+        readonly NullableCompositeKey _nullableKey1 = new()
         {
             ID1 = 1,
             ID2 = 2,
             Value = "First",
         };
-        readonly NullableCompositeKey _nullableKey2 = new NullableCompositeKey
+        readonly NullableCompositeKey _nullableKey2 = new()
         {
             ID1 = 1,
             ID2 = null,
             Value = "Second",
         };
-        readonly DateTime _now = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+        readonly ComputedColumn _computedColumn = new()
+        {
+            Num1 = 1,
+            Num2 = 7,
+        };
+        readonly static DateTime _now = NewDateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+        readonly static DateTime _today = NewDateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
         readonly int _increment = 8;
 
-        private void ResetDb()
+        private static DateTime NewDateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0)
+            => new DateTime(year, month, day, hour, minute, second, DateTimeKind.Utc);
+
+        protected void ResetDb()
         {
             using var dbContext = new TestDbContext(_fixture.DataContextOptions);
 
@@ -87,6 +96,8 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.RemoveRange(dbContext.StringKeys);
             dbContext.RemoveRange(dbContext.StringKeysAutoGen);
             dbContext.RemoveRange(dbContext.TestEntities);
+            dbContext.RemoveRange(dbContext.GeneratedAlwaysAsIdentity);
+            dbContext.RemoveRange(dbContext.ComputedColumns);
 
             dbContext.Add(_dbCountry);
             dbContext.Add(_dbVisitOld);
@@ -95,6 +106,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.Add(_dbBook);
             dbContext.Add(_nullableKey1);
             dbContext.Add(_nullableKey2);
+            dbContext.Add(_computedColumn);
             dbContext.SaveChanges();
         }
 
@@ -105,21 +117,6 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
 
             dbContext.AddRange(seedValue.Cast<object>());
             dbContext.SaveChanges();
-        }
-
-        private static void AssertEqual(PageVisit expected, PageVisit actual)
-        {
-            actual.UserID.Should().Be(expected.UserID);
-            actual.Date.Should().Be(expected.Date);
-            actual.Visits.Should().Be(expected.Visits);
-            actual.FirstVisit.Should().Be(expected.FirstVisit);
-            actual.LastVisit.Should().Be(expected.LastVisit);
-        }
-
-        private static void AssertEqual(Book expected, Book actual)
-        {
-            actual.Name.Should().Be(expected.Name);
-            actual.Genres.Should().Equal(expected.Genres);
         }
 
         [Fact]
@@ -370,7 +367,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -394,7 +391,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -418,7 +415,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -447,7 +444,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -477,7 +474,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -506,7 +503,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -535,7 +532,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 5,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -564,7 +561,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -593,7 +590,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -622,7 +619,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -651,7 +648,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -680,7 +677,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -709,7 +706,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -738,7 +735,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             var newVisit = new PageVisit
             {
                 UserID = 1,
-                Date = DateTime.Today,
+                Date = _today,
                 Visits = 1,
                 FirstVisit = _now,
                 LastVisit = _now,
@@ -1121,6 +1118,39 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
 
             dbContext.JsonDatas.OrderBy(c => c.ID).Should().SatisfyRespectively(
                 j => JToken.DeepEquals(JObject.Parse(updatedJson.Data), JObject.Parse(j.Data)).Should().BeTrue());
+        }
+
+        [Fact]
+        public void Upsert_JsonData_Update_ComplexObject()
+        {
+            if (_fixture.DbDriver != DbDriver.Postgres)
+                return; // Default values on text columns not supported in MySQL
+
+            var existingJson = new JsonData
+            {
+                Data = JsonConvert.SerializeObject(new { hello = "world" }),
+            };
+
+            ResetDb(existingJson);
+            using (var testContext = new TestDbContext(_fixture.DataContextOptions))
+            {
+                testContext.JsonDatas.OrderBy(c => c.ID).Should().SatisfyRespectively(
+                    j => JToken.DeepEquals(JObject.Parse(existingJson.Data), JObject.Parse(j.Data)).Should().BeTrue());
+            }
+
+            using var dbContext = new TestDbContext(_fixture.DataContextOptions);
+
+            var timestamp = new DateTime(2021, 2, 3, 4, 5, 6, DateTimeKind.Utc);
+            var updatedJson = new JsonData
+            {
+                Child = new ChildObject { Value = "test", Time = timestamp }
+            };
+
+            dbContext.JsonDatas.Upsert(updatedJson)
+                .Run();
+
+            dbContext.JsonDatas.OrderBy(c => c.ID).Should().SatisfyRespectively(
+                j => j.Child.Time.Should().Be(timestamp));
         }
 
         [Fact]
@@ -1616,6 +1646,79 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
         }
 
         [Fact]
+        public void Upsert_UpdateCondition_ValueCheck()
+        {
+            var dbItem1 = new TestEntity
+            {
+                Num1 = 1,
+                Num2 = 2,
+                Text1 = "hello",
+            };
+            var dbItem2 = new TestEntity
+            {
+                Num1 = 2,
+                Num2 = 3,
+                Text1 = null
+            };
+
+            ResetDb(dbItem1, dbItem2);
+            using var dbContext = new TestDbContext(_fixture.DataContextOptions);
+
+            dbContext.TestEntities.UpsertRange(dbItem1, dbItem2)
+                .On(j => j.Num1)
+                .WhenMatched((j, i) => new TestEntity
+                {
+                    Num2 = j.Num2 + 1,
+                })
+                .UpdateIf(j => j.Text1 == "hello")
+                .Run();
+
+            dbContext.TestEntities.OrderBy(t => t.ID).Should().SatisfyRespectively(
+                test => test.Should().MatchModel(dbItem1, num2: dbItem1.Num2 + 1),
+                test => test.Should().MatchModel(dbItem2));
+        }
+
+        [Fact]
+        public void Upsert_UpdateCondition_ValueCheck_UpdateColumnFromCondition()
+        {
+            if (BuildEnvironment.IsGitHub && _fixture.DbDriver == DbDriver.MySQL && Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                // Disabling this test on GitHub Ubuntu images - they're cursed?
+                return;
+            }
+
+            var dbItem1 = new TestEntity
+            {
+                Num1 = 1,
+                Num2 = 2,
+                Text1 = "hello",
+            };
+            var dbItem2 = new TestEntity
+            {
+                Num1 = 2,
+                Num2 = 3,
+                Text1 = null
+            };
+
+            ResetDb(dbItem1, dbItem2);
+            using var dbContext = new TestDbContext(_fixture.DataContextOptions);
+
+            dbContext.TestEntities.UpsertRange(dbItem1, dbItem2)
+                .On(j => j.Num1)
+                .WhenMatched((j, i) => new TestEntity
+                {
+                    Num2 = j.Num2 + 1,
+                    Text1 = "world",
+                })
+                .UpdateIf(j => j.Text1 == "hello")
+                .Run();
+
+            dbContext.TestEntities.OrderBy(t => t.ID).Should().SatisfyRespectively(
+                test => test.Should().MatchModel(dbItem1, num2: dbItem1.Num2 + 1, text1: "world"),
+                test => test.Should().MatchModel(dbItem2));
+        }
+
+        [Fact]
         public void Upsert_NullableRequired_Insert()
         {
             if (_fixture.DbDriver == DbDriver.MySQL)
@@ -1654,6 +1757,29 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 .Run();
 
             dbContext.NullableRequireds.Should().HaveCount(100_000);
+        }
+
+        [Fact]
+        public void ComputedColumn_Updates()
+        {
+            if (_fixture.DbDriver == DbDriver.InMemory)
+                return; // In memory db doesn't support sql computed columns
+
+            ResetDb();
+            using var dbContext = new TestDbContext(_fixture.DataContextOptions);
+
+            var item = new ComputedColumn
+            {
+                Num1 = 1,
+                Num2 = 9
+            };
+
+            dbContext.ComputedColumns.Upsert(item)
+                .On(c => c.Num1)
+                .Run();
+
+            dbContext.ComputedColumns.OrderBy(c => c.Num1).Should().SatisfyRespectively(
+                visit => visit.Should().MatchModel(item, num3: 10));
         }
     }
 }
