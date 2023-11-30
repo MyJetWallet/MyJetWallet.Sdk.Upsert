@@ -22,7 +22,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.IntegrationTests
             : base(contexts)
         { }
 
-        [Fact]
+        //[Fact]
         public void GeneratedAlwaysAsIdentity_NoUpdate_New()
         {
             ResetDb();

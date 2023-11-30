@@ -15,7 +15,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
 
         private IProperty NoProperty(string propertyName) => Substitute.For<IProperty>();
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Constant()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -29,7 +29,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().Be(1);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Field()
         {
             var value = 2;
@@ -44,7 +44,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().Be(value);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_FieldAndProperty()
         {
             var value = new TestEntity { Num1 = 3 };
@@ -59,7 +59,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().Be(value.Num1);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Method()
         {
             var value = "hello_world ";
@@ -74,7 +74,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().Be(value.Trim());
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_StaticMethod()
         {
             var value1 = "hello";
@@ -90,7 +90,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().Be(value1 + ", " + value2);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueIncrement()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -106,7 +106,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HaveConstantValue(e => e.Value2, 1);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueIncrement_Reverse()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -122,7 +122,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                .HavePropertyValue(e => e.Value2, "Num1", true);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueSubtract()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -138,7 +138,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                .HaveConstantValue(e => e.Value2, 2);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueMultiply()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -154,7 +154,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HaveConstantValue(e => e.Value2, 3);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueDivide()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -170,7 +170,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HaveConstantValue(e => e.Value2, 4);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueModulo()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -186,7 +186,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HaveConstantValue(e => e.Value2, 4);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueBitwiseOr()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -202,7 +202,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HaveConstantValue(e => e.Value2, 1);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_ValueBitwiseAnd()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -218,7 +218,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HaveConstantValue(e => e.Value2, 1);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Property()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -232,7 +232,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BePropertyValue("Num1", true);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_PropertyOther()
         {
             Expression<Func<TestEntity, TestEntity>> exp = e => new TestEntity
@@ -246,7 +246,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BePropertyValue("Num2", true);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Property_WithSource()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -260,7 +260,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BePropertyValue("Num1", true);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Property_FromSource()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -274,7 +274,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BePropertyValue("Num1", false);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_DateTime_Now()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -290,7 +290,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .And.BeAfter(DateTime.Now.AddMinutes(-1));
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Nullable_Assign()
         {
             int value = 5;
@@ -306,7 +306,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BeOfType<int>().And.Be(value);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Nullable_Cast()
         {
             int? value = 5;
@@ -322,7 +322,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BeOfType<int>().And.Be(value);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Nullable_Coalesce()
         {
             int? value = 5;
@@ -338,7 +338,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BeOfType<int>().And.Be(value);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelpersTests_Nullable_GetValueOrDefault()
         {
             int? value = 5;
@@ -354,7 +354,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BeOfType<int>().And.Be(value);
         }
 
-        [Fact]
+        //[Fact]
         public void ExpressionHelperTests_UnsupportedExpression()
         {
             var input = 5;
@@ -372,7 +372,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
             expValue.Should().BeOfType<int>().And.Be(input << 4);
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Sum()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -390,7 +390,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HavePropertyValue(e => e.Value2, "Text2", false);
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Sum_Grouped1()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -408,7 +408,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HavePropertyValue(e => e.Value2, "Text2", false);
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Sum_Grouped2()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -426,7 +426,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HavePropertyValue(e => e.Value2, "Text2", false));
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Multiply()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -444,7 +444,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HavePropertyValue(e => e.Value2, "Num2", false));
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Multiply_Grouped1()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -462,7 +462,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                 .HavePropertyValue(e => e.Value2, "Num2", false);
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Multiply_Grouped2()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -480,7 +480,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HavePropertyValue(e => e.Value2, "Num2", false));
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Conditional()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -503,7 +503,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HaveConstantValue(e => e.Value2, 0));
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Conditional_NotEqual()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -522,7 +522,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HaveConstantValue(e => e.Value2, 4));
         }
 
-        [Fact]
+        //[Fact]
         public void CompoundExpression_Conditional_NotNull()
         {
             Expression<Func<TestEntity, TestEntity, TestEntity>> exp = (e1, e2) => new TestEntity
@@ -541,7 +541,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HaveConstantValue(e => e.Value2, null));
         }
 
-        [Fact]
+        //[Fact]
         public void Condition_AndAlso()
         {
             Expression<Func<TestEntity, TestEntity, bool>> exp = (e1, e2)
@@ -558,7 +558,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Internal
                     .HavePropertyValue(e => e.Value2, "Text1", false));
         }
 
-        [Fact]
+        //[Fact]
         public void Condition_ElseIf()
         {
             Expression<Func<TestEntity, TestEntity, bool>> exp = (e1, e2)

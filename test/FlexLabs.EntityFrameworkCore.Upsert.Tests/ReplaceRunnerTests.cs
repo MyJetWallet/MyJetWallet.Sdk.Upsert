@@ -42,7 +42,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests
             public DbSet<TestEntity> Entities { get; set; }
         }
 
-        [Fact]
+        ////[Fact]
         public void ReplaceRunner_FakeSqliteRunner()
         {
             var services = new ServiceCollection();

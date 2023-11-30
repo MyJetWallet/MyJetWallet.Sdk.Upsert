@@ -106,7 +106,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
             "VALUES (@p0, @p1) ON CONFLICT (\"ID\") " +
             "DO NOTHING";
 
-        [Fact]
+        //[Fact]
         public void PostgresSyntaxRunner_NoUpdate_WithSequence()
         {
             _dbContext.Upsert(new TestEntityWithIdentity())

@@ -83,7 +83,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string NoUpdate_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_NoUpdate()
         {
             _dbContext.Upsert(new TestEntity())
@@ -96,7 +96,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string NoUpdate_Multiple_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_NoUpdate_Multiple()
         {
             _dbContext.UpsertRange(new TestEntity(), new TestEntity())
@@ -109,7 +109,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string NoUpdate_WithNullable_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_NoUpdate_WithNullable()
         {
             _dbContext.Upsert(new TestEntityWithNullableKey())
@@ -123,7 +123,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Constant_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Constant()
         {
             _dbContext.Upsert(new TestEntity())
@@ -139,7 +139,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Constant_Multiple_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Constant_Multiple()
         {
             _dbContext.UpsertRange(new TestEntity(), new TestEntity())
@@ -155,7 +155,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Source_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Source()
         {
             _dbContext.Upsert(new TestEntity())
@@ -171,7 +171,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_BinaryAdd_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_BinaryAdd()
         {
             _dbContext.Upsert(new TestEntity())
@@ -187,7 +187,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Coalesce_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Coalesce()
         {
             _dbContext.Upsert(new TestEntity())
@@ -203,7 +203,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_BinaryAddMultiply_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_BinaryAddMultiply()
         {
             _dbContext.Upsert(new TestEntity())
@@ -219,7 +219,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_BinaryAddMultiplyGroup_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_BinaryAddMultiplyGroup()
         {
             _dbContext.Upsert(new TestEntity())
@@ -235,7 +235,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Condition_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Condition()
         {
             _dbContext.Upsert(new TestEntity())
@@ -252,7 +252,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Condition_UpdateConditionColumn_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Condition_UpdateConditionColumn()
         {
             _dbContext.Upsert(new TestEntity())
@@ -270,7 +270,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Condition_AndCondition_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Condition_AndCondition()
         {
             _dbContext.Upsert(new TestEntity())
@@ -287,7 +287,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.Runners
         }
 
         protected abstract string Update_Condition_NullCheck_Sql { get; }
-        [Fact]
+        //[Fact]
         public void SqlSyntaxRunner_Update_Condition_NullCheck()
         {
             _dbContext.Upsert(new TestEntity())

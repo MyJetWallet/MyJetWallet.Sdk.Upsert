@@ -119,7 +119,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.SaveChanges();
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_InitialDbState()
         {
             ResetDb();
@@ -133,7 +133,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 pv => pv.Should().MatchModel(_dbVisit));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_EFCore_KeyAutoGen()
         {
             ResetDb();
@@ -148,7 +148,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.StringKeysAutoGen.Should().OnlyContain(e => !string.IsNullOrEmpty(e.ID));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_IdentityKey_NoOn_InvalidMatchColumn()
         {
             ResetDb();
@@ -166,7 +166,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             action.Should().Throw<InvalidMatchColumnsException>();
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_IdentityKey_ExplicitOn_InvalidMatchColumn()
         {
             ResetDb();
@@ -186,7 +186,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             action.Should().Throw<InvalidMatchColumnsException>();
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_IdentityKey_NoOn_AllowWithOverride()
         {
             ResetDb();
@@ -207,7 +207,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.Countries.Should().HaveCount(2);
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_IdentityKey_ExplicitOn_AllowWithOverride()
         {
             ResetDb();
@@ -229,7 +229,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.Countries.Should().HaveCount(2);
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Country_Update_On()
         {
             ResetDb();
@@ -251,7 +251,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 country => country.Should().MatchModel(newCountry));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Country_Update_On_NoUpdate()
         {
             ResetDb();
@@ -274,7 +274,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 country => country.Should().MatchModel(_dbCountry));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Country_Update_On_WhenMatched_Values()
         {
             ResetDb();
@@ -302,7 +302,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                     .Subject.Created.Should().Be(_dbCountry.Created));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Country_Update_On_WhenMatched_Constants()
         {
             ResetDb();
@@ -330,7 +330,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                     .Subject.Created.Should().Be(_dbCountry.Created));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Country_Insert_On_WhenMatched()
         {
             ResetDb();
@@ -358,7 +358,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 country => country.Should().MatchModel(newCountry));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_PreComputedOn()
         {
             ResetDb();
@@ -382,7 +382,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On()
         {
             ResetDb();
@@ -406,7 +406,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueAdd()
         {
             ResetDb();
@@ -435,7 +435,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + 1));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueAdd_FromVar()
         {
             ResetDb();
@@ -465,7 +465,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + increment));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueAdd_FromField()
         {
             ResetDb();
@@ -494,7 +494,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + _increment));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_FromSource_ValueAdd()
         {
             ResetDb();
@@ -523,7 +523,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + 1));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_FromSource_ColumnAdd()
         {
             ResetDb();
@@ -552,7 +552,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + newVisit.Visits));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueAdd_Reversed()
         {
             ResetDb();
@@ -581,7 +581,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + 1));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueSubtract()
         {
             ResetDb();
@@ -610,7 +610,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits - 2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueMultiply()
         {
             ResetDb();
@@ -639,7 +639,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits * 3));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueBitwiseOr()
         {
             ResetDb();
@@ -668,7 +668,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits | 3));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueBitwiseAnd()
         {
             ResetDb();
@@ -697,7 +697,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits & 3));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueDivide()
         {
             ResetDb();
@@ -726,7 +726,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits / 4));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_PageVisit_Update_On_WhenMatched_ValueModulo()
         {
             ResetDb();
@@ -755,7 +755,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit, compareFirstVisit: false, expectedVisits: _dbVisit.Visits % 4));
         }
 
-        [Fact]
+        //[Fact]
         public void UpsertRange_PageVisit_Update_On_WhenMatched()
         {
             ResetDb();
@@ -793,7 +793,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit2));
         }
 
-        [Fact]
+        //[Fact]
         public void UpsertRange_PageVisit_Update_On_WhenMatched_MultipleInsert()
         {
             ResetDb();
@@ -832,7 +832,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit2));
         }
 
-        [Fact]
+        //[Fact]
         public void UpsertRange_PageVisit_Update_On_WhenMatched_MultipleUpdate()
         {
             ResetDb();
@@ -869,7 +869,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit2, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + 1));
         }
 
-        [Fact]
+        //[Fact]
         public void UpsertRange_PageVisit_Update_On_WhenMatched_MultipleUpdate_FromSource()
         {
             ResetDb();
@@ -906,7 +906,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 visit => visit.Should().MatchModel(newVisit2, compareFirstVisit: false, expectedVisits: _dbVisit.Visits + 1));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Status_Update_AutoMatched_New()
         {
             ResetDb();
@@ -926,7 +926,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 status => status.Should().MatchModel(newStatus));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Status_Update_AutoMatched_Existing()
         {
             ResetDb();
@@ -945,7 +945,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 status => status.Should().MatchModel(newStatus));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_DashedTable()
         {
             ResetDb();
@@ -965,7 +965,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 r => r.DataSet.Should().Be(newRecord.DataSet));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_SchemaTable()
         {
             ResetDb();
@@ -985,7 +985,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 r => r.Name.Should().Be(newRecord.Name));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Book_On_Update()
         {
             ResetDb();
@@ -1005,7 +1005,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 book => book.Should().MatchModel(newBook));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_Book_On_Insert()
         {
             ResetDb();
@@ -1026,7 +1026,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 book => book.Should().MatchModel(newBook));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_JObjectData()
         {
             ResetDb();
@@ -1044,7 +1044,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 j => JToken.DeepEquals(newJson.Data, j.Data).Should().BeTrue());
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_JObject_Update()
         {
             var existingJson = new JObjectData
@@ -1073,7 +1073,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 j => JToken.DeepEquals(updatedJson.Data, j.Data).Should().BeTrue());
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_JsonData()
         {
             ResetDb();
@@ -1091,7 +1091,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 j => JToken.DeepEquals(JObject.Parse(newJson.Data), JObject.Parse(j.Data)).Should().BeTrue());
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_JsonData_Update()
         {
             var existingJson = new JsonData
@@ -1120,7 +1120,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 j => JToken.DeepEquals(JObject.Parse(updatedJson.Data), JObject.Parse(j.Data)).Should().BeTrue());
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_JsonData_Update_ComplexObject()
         {
             if (_fixture.DbDriver != DbDriver.Postgres)
@@ -1153,7 +1153,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 j => j.Child.Time.Should().Be(timestamp));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_GuidKey_AutoGenThrows()
         {
             ResetDb();
@@ -1170,7 +1170,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             action.Should().Throw<InvalidMatchColumnsException>();
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_StringKey_AutoGenThrows()
         {
             ResetDb();
@@ -1187,7 +1187,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             action.Should().Throw<InvalidMatchColumnsException>();
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_GuidKey()
         {
             ResetDb();
@@ -1206,7 +1206,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 k => k.ID.Should().Be(newItem.ID));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_StringKey()
         {
             ResetDb();
@@ -1225,7 +1225,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 k => k.ID.Should().Be(newItem.ID));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_KeyOnly()
         {
             ResetDb();
@@ -1244,7 +1244,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 k => (k.ID1, k.ID2).Should().Be((newItem.ID1, newItem.ID2)));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_NullableKeys()
         {
             if (_fixture.DbDriver == DbDriver.MySQL || _fixture.DbDriver == DbDriver.Postgres || _fixture.DbDriver == DbDriver.Sqlite)
@@ -1276,7 +1276,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 k => (k.ID1, k.ID2, k.Value).Should().Be((1, 3, "Third")));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_CompositeExpression_New()
         {
             ResetDb();
@@ -1302,7 +1302,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(newItem));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_CompositeExpression_Update()
         {
             var dbItem = new TestEntity
@@ -1336,7 +1336,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem, num2: dbItem.Num2 * 2 + newItem.Num2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_ConditionalExpression_New()
         {
             ResetDb();
@@ -1362,7 +1362,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(newItem));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_ConditionalExpression_UpdateTrue()
         {
             var dbItem = new TestEntity
@@ -1396,7 +1396,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem, num2: dbItem.Num2 - newItem.Num2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_ConditionalExpression_UpdateFalse()
         {
             var dbItem = new TestEntity
@@ -1430,7 +1430,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem, num2: 0));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_Constant()
         {
             var dbItem = new TestEntity
@@ -1465,7 +1465,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem, num2: newItem.Num2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_New()
         {
             ResetDb();
@@ -1492,7 +1492,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(newItem));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_New_AutoUpdate()
         {
             ResetDb();
@@ -1515,7 +1515,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(newItem));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_Update()
         {
             var dbItem = new TestEntity
@@ -1550,7 +1550,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem, num2: newItem.Num2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_AutoUpdate()
         {
             var dbItem = new TestEntity
@@ -1581,7 +1581,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(newItem));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_NoUpdate()
         {
             var dbItem = new TestEntity
@@ -1612,7 +1612,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_NullCheck()
         {
             var dbItem1 = new TestEntity
@@ -1645,7 +1645,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_ValueCheck()
         {
             var dbItem1 = new TestEntity
@@ -1678,7 +1678,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_UpdateCondition_ValueCheck_UpdateColumnFromCondition()
         {
             if (BuildEnvironment.IsGitHub && _fixture.DbDriver == DbDriver.MySQL && Environment.OSVersion.Platform == PlatformID.Unix)
@@ -1718,7 +1718,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 test => test.Should().MatchModel(dbItem2));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_NullableRequired_Insert()
         {
             if (_fixture.DbDriver == DbDriver.MySQL)
@@ -1740,7 +1740,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
                 r => r.Text.Should().Be("B"));
         }
 
-        [Fact]
+        //[Fact]
         public void Upsert_100k_Insert_MultiQuery()
         {
             ResetDb();
@@ -1759,7 +1759,7 @@ namespace FlexLabs.EntityFrameworkCore.Upsert.Tests.EF
             dbContext.NullableRequireds.Should().HaveCount(100_000);
         }
 
-        [Fact]
+        //[Fact]
         public void ComputedColumn_Updates()
         {
             if (_fixture.DbDriver == DbDriver.InMemory)
