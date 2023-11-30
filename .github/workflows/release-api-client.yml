@@ -1,19 +1,8 @@
 name: Release API client nuget
 
 on:
-  workflow_call:
-    inputs:
-      repository_name:
-        required: true
-        type: string
-      release_version:
-        required: true
-        type: string
-    secrets:
-      NUGET_TOCKEN:
-        required: true
-      NUGET_AUTH_TOKEN:
-        required: true
+  push:
+    tags: "*"
 
 jobs:
   build:
